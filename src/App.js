@@ -3,9 +3,10 @@ import './style.css';
 import { Product } from './Object.js';
 import Nike from './component/Nike';
 export default function App() {
-  const [showbar, setShowbar] = useState(true);
+  const [showbar, setShowbar] = useState();
   const [showValue, setshowValue] = useState([]);
   const [Array, setArray] = useState(Product);
+  const [about,setAbout]=useState([])
 
   // console.log(Product, 'asa');
 
@@ -13,13 +14,23 @@ export default function App() {
     let { value } = e.target;
     // setshowValue(value);
     filter(value);
+    if(value==''){
+      setShowbar(false)
+    }
   }
+
   function filter(str) {
     let filtered = Product.filter((ele) => {
       if (ele.category.toLowerCase().includes(str.toLowerCase())) {
         console.log(ele.category);
         setshowValue(ele.category);
+        setShowbar(true)
         return ele.category;
+      }else if(ele.about.toLowerCase().includes(str.toLowerCase())){
+        console.log(ele.about)
+        setAbout(ele.about)
+        setShowbar(true)
+
       }
     });
     setArray(filtered);
@@ -27,8 +38,11 @@ export default function App() {
   return (
     <div>
       <input type="search" onChange={handlechange} />
-      {showbar ? <a>{showValue}</a> : <a></a>}
-      <Nike array={Array} />
+      {showbar ? <p>{showValue}</p> : <p></p>}
+      {
+        showbar?<p>{about}</p>:<p></p>
+      }
+      {/* <Nike array={Array} /> */}
     </div>
   );
 }
