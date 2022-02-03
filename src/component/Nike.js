@@ -4,7 +4,7 @@ export default function Nike({ array }) {
   return (
     <div>
       {array.map((ele) => (
-        <div>{ele.category}</div>
+        <div key={ele.id}>{ele.category}</div>
       ))}
     </div>
   );
