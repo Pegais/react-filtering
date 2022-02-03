@@ -7,7 +7,10 @@ export default function App() {
   const [showValue, setshowValue] = useState([]);
   const [Array, setArray] = useState(Product);
   const [about,setAbout]=useState('')
-  const [linkNike,setLinkNike]=useState('')
+
+  const [link,setLinkNike]=useState('')
+  const [linkPuma,setLinkPuma]=useState('')
+  const [linkSome,setLinkSome]=useState('')
 
   // to check fro particular category and open the link to that category
 
@@ -19,12 +22,19 @@ export default function App() {
     filter(value);
     linkSearch(value);
     if(value==''){
+      setLinkNike('')
+      setLinkPuma('')
+      setLinkSome('')
       setShowbar(false)
     }
   }
   function linkSearch(str){
     if(str.toLowerCase()=='nike'){
       setLinkNike(str);
+    }else if(str.toLowerCase()=='puma'){
+      setLinkPuma(str);
+    }else if(str.toLowerCase()=='some'){
+      setLinkSome(str);
     }
   }
 
@@ -39,10 +49,17 @@ export default function App() {
         console.log(ele.about,ele.category)
         console.log({...about,about:ele.about,category:ele.category})
         setAbout({...about,about:ele.about,category:ele.category})
+        
+
+        // checking if category exist and than give them link
         if(ele.category=='nike'){
           setLinkNike(ele.category)
+          setShowbar(true)
+        }else if(ele.category=='puma'){
+          setLinkPuma(ele.category);
+        }else if(ele.category=='some'){
+          setLinkSome(ele.category);
         }
-        setShowbar(true)
 
       }
     });
@@ -61,8 +78,15 @@ export default function App() {
         </span>:<p></p>
       }
        {
-         showbar?<p>{linkNike}</p>:<></>
+         showbar?<p>{link}</p>:<></>
        }
+       {
+         showbar?<p>{linkPuma}</p>:<></>
+       }
+       {
+         showbar?<p>{linkSome}</p>:<></>
+       }
+
       
       {/* <Nike array={Array} /> */}
     </div>
