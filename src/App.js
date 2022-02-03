@@ -7,6 +7,9 @@ export default function App() {
   const [showValue, setshowValue] = useState([]);
   const [Array, setArray] = useState(Product);
   const [about,setAbout]=useState('')
+  const [linkNike,setLinkNike]=useState('')
+
+  // to check fro particular category and open the link to that category
 
   // console.log(Product, 'asa');
 
@@ -14,8 +17,14 @@ export default function App() {
     let { value } = e.target;
     // setshowValue(value);
     filter(value);
+    linkSearch(value);
     if(value==''){
       setShowbar(false)
+    }
+  }
+  function linkSearch(str){
+    if(str.toLowerCase()=='nike'){
+      setLinkNike(str);
     }
   }
 
@@ -30,16 +39,20 @@ export default function App() {
         console.log(ele.about,ele.category)
         console.log({...about,about:ele.about,category:ele.category})
         setAbout({...about,about:ele.about,category:ele.category})
+        if(ele.category=='nike'){
+          setLinkNike(ele.category)
+        }
         setShowbar(true)
 
       }
     });
     setArray(filtered);
   }
+ 
   return (
     <div>
       <input type="search" onChange={handlechange} />
-      {showbar ? <p>{showValue}</p> : <p></p>}
+      {/* {showbar ? <p>{showValue}</p> : <p></p>} */}
       {
         showbar?<span>
           <span>{about.about}</span>
@@ -47,6 +60,10 @@ export default function App() {
 
         </span>:<p></p>
       }
+       {
+         showbar?<p>{linkNike}</p>:<></>
+       }
+      
       {/* <Nike array={Array} /> */}
     </div>
   );
