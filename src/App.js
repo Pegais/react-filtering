@@ -69,7 +69,7 @@ export default function App() {
   return (
     <div>
       <input type="search" onChange={handlechange} />
-      {/* {showbar ? <p>{showValue}</p> : <p></p>} */}
+      {showbar ? <p>{showValue}</p> : <p></p>}
       {
         showbar?<span>
           <span>{about.about}</span>
